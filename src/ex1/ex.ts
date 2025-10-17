@@ -5,7 +5,7 @@
  X liste des taches
  X taches supprimables
  X taches persistantes (localStorage)
- * taches cochable (faite)
+ X taches cochable (faite)
  * filtrage (toutes, faites, à faire)
 */
 interface Task {
@@ -32,6 +32,34 @@ const taskList = document.createElement('ul') as HTMLUListElement;
 if (tasks.length > 0) {
     tasks.forEach((task) => {addTask(task, taskList)});
 }
+
+// Filtre
+const filterRadio_1 = document.createElement('input') as HTMLInputElement
+filterRadio_1.type = "radio"
+filterRadio_1.name = "filter"
+const labelFilter_1 = document.createElement('label') as HTMLLabelElement
+labelFilter_1.textContent = "Toutes"
+labelFilter_1.appendChild(filterRadio_1)
+body.appendChild(labelFilter_1)
+
+
+const filterRadio_2 = document.createElement('input') as HTMLInputElement
+filterRadio_2.type = "radio"
+filterRadio_2.name = "filter"
+const labelFilter_2 = document.createElement('label') as HTMLLabelElement
+labelFilter_2.textContent = "À faire"
+labelFilter_2.appendChild(filterRadio_2)
+body.appendChild(labelFilter_2)
+
+const filterRadio_3 = document.createElement('input') as HTMLInputElement
+filterRadio_3.type = "radio"
+filterRadio_3.name = "filter"
+const labelFilter_3 = document.createElement('label') as HTMLLabelElement
+labelFilter_3.textContent = "Faites"
+labelFilter_3.appendChild(filterRadio_3)
+body.appendChild(labelFilter_3)
+
+
 
 const div1 = document.createElement('div');
 div1.appendChild(input);
@@ -103,4 +131,31 @@ function deleteTaskHandler(li: HTMLLIElement) {
     
     // Supprimer la tache de l'affichage
     li.remove();
+}
+
+
+function onClickHandler(radio: HTMLInputElement) {
+    const filter = radio.nextSibling?.textContent?.trim();
+    const lis = taskList.querySelectorAll('li');
+    lis.forEach((li) => {
+        const checkbox = li.querySelector('input[type="checkbox"]') as HTMLInputElement;
+        switch (filter) {
+            case "Toutes":
+                break;
+            case "À faire":
+                if (checkbox.checked) {
+                    li.style.display = 'none';
+                } else {
+                    li.style.display = '';
+                }
+                break;
+            case "Faites":
+                if (checkbox.checked) {
+                    li.style.display = '';
+                } else {
+                    li.style.display = 'none';
+                }
+                break;
+        }
+    });
 }
