@@ -1,1 +1,2 @@
-j'ai fini par perdre les exos à faire comme un trou de bal
+ok j'ai retrouvé ça let's go (mon visionneur de pdf qui voulait pas marché)
+(trolleur -2025
